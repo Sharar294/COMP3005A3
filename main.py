@@ -1,19 +1,15 @@
 import psycopg2
-import os
-
-
-DB_CONFIG = {
-    "host": "localhost",
-    "port": 5432,
-    "dbname": "students_db",
-    "user": "postgres",
-    "password": "postgres",
-}
-
+import time
 
 def get_connection():
     """Open and return a new connection to the PostgreSQL database."""
-    return psycopg2.connect(**DB_CONFIG)
+    return psycopg2.connect(
+        host="localhost",
+        port=5432,
+        dbname="students_db",
+        user="postgres",
+        password="postgres",
+    )
 
 def getAllStudents():
     """Retrieve and display all records from the students table."""
@@ -67,12 +63,18 @@ def deleteStudent(student_id):
 
 
 if __name__ == "__main__":
+    print("-----------------------------------------------------------------------------")
     getAllStudents()
-    addStudent("Alice", "Wong", "alice.wong@example.com", "2023-09-03")
+    print("-----------------------------------------------------------------------------")
+    addStudent("Michael", "Corleone", "michael.corleone@example.com", "2023-09-03")
     getAllStudents()
+    print("-----------------------------------------------------------------------------")
+    time.sleep(10)
     updateStudentEmail(1, "john.new@example.com")
     getAllStudents()
+    print("-----------------------------------------------------------------------------")
+    time.sleep(10)
     deleteStudent(3)
     getAllStudents()
-    
+    print("-----------------------------------------------------------------------------")
 
